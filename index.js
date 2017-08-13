@@ -1,38 +1,33 @@
-const toDegrees = angle => angle * (180 / Math.PI);
-const toRadians = angle => angle * (Math.PI / 180);
-let isTri = str => {
-  return /^(sin|cos|tan)\(.+?\)/.test(str);
+const postcss = require('postcss');
+const optionsDefault = {
+  precision: 5
 };
-
-var postcss = require('postcss');
+const trigPattern = /\b(sin|cos|tan)\((.+?)\)/g;
+const toRadians = (angle) => angle * (Math.PI / 180);
 
 module.exports = postcss.plugin('postcss-simple-trig', (opts) => {
-  opts = opts || {};
+  opts = Object.assign({}, optionsDefault, opts);
 
-  // Work with options here
+  let eavlMath = (...args) => {
+    let radians = args[2];
+    if (radians.endsWith('deg')) {
+      radians = toRadians(radians.replace('deg', ''));
+    } else if (radians.endsWith('PI')) {
+      radians = `${radians.replace('PI', '') * Math.PI}`;
+    }
+    try {
+      return +eval(`Math.${args[1]}(${radians})`).toFixed(opts.precision);
+    } catch (e) {
+      return args[0];
+    }
+  };
 
-  return (root, result) => {
-    // Transform CSS AST here
-    root.walkDecls(decl => {
-      // Transform each property declaration here
-      // decl.prop = decl.prop.split('').reverse().join('');
-      if (!isTri(decl.value)) {
+  return (root) => {
+    root.walkDecls((decl) => {
+      if (!trigPattern.test(decl.value)) {
         return;
       }
+      decl.value = decl.value.replace(trigPattern, eavlMath);
     });
   };
 });
-
-// export default postcss.plugin('postcss-reverse-props', (options = {}) => {
-//   // Work with options here
-//   return root => {
-//     // Transform each rule here
-//     root.walkDecls(decl => {
-//       // Transform each property declaration here
-//       // decl.prop = decl.prop.split('').reverse().join('');
-//       if (!isTri(decl.value)) {
-//         return;
-//       };
-//     });
-//   };
-// });
