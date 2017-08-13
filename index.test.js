@@ -2,12 +2,50 @@ const postcss = require('postcss');
 
 const plugin = require('./');
 
+const toRadians = (angle) => angle * (Math.PI / 180);
+
 function run(input, output, opts) {
   return postcss([plugin(opts)]).process(input).then(result => {
     expect(result.css).toEqual(output);
     expect(result.warnings().length).toBe(0);
   });
 }
+
+it('sin( 1e2deg )', () => {
+  return run(
+    'a{ --c: sin(1e2deg ) }',
+    `a{ --c: ${Math.sin(toRadians(1e2)).toFixed(5)} }`,
+    // 'a{ --c: 0.98481 }',
+    {}
+  );
+});
+
+it('sin( 1.212e2 )', () => {
+  return run(
+    'a{ --c: sin( 1.212e2 ) }',
+    `a{ --c: ${Math.sin(1.212e2).toFixed(5)} }`,
+    // 'a{ --c: -0.58779 }',
+    {}
+  );
+});
+
+it('sin(.3deg )', () => {
+  return run(
+    'a{ --c: sin(.3deg ) }',
+    `a{ --c: ${Math.sin(toRadians(0.3)).toFixed(5)} }`,
+    // 'a{ --c: 0.00524 }',
+    {}
+  );
+});
+
+it('sin(.3)', () => {
+  return run(
+    'a{ --c: sin(.3) }',
+    'a{ --c: 0.29552 }',
+    // Math.sin(.3).toFixed(5)
+    {}
+  );
+});
 
 it('sin(aaa)', () => {
   return run(
