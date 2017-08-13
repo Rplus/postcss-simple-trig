@@ -3,18 +3,14 @@ const optionsDefault = {
   precision: 5
 };
 const trigPattern = /\b(sin|cos|tan)\((.+?)\)/g;
-const toRadians = (angle) => angle * (Math.PI / 180);
 
 module.exports = postcss.plugin('postcss-simple-trig', (opts) => {
   opts = Object.assign({}, optionsDefault, opts);
 
   let eavlMath = (...args) => {
-    let radians = args[2];
-    if (radians.endsWith('deg')) {
-      radians = toRadians(radians.replace('deg', ''));
-    } else if (radians.endsWith('PI')) {
-      radians = `${radians.replace('PI', '') * Math.PI}`;
-    }
+    let radians = 1 * args[2].replace(/(.+?)(deg|PI)/, (...r) => {
+      return r[1] * Math.PI / (r[2] === 'deg' ? 180 : 1);
+    });
     if (isNaN(radians)) {
       return args[0];
     }
