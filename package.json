@@ -1,6 +1,6 @@
 {
   "name": "postcss-simple-trig",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A PostCSS plugin to calculate trigonometric functions sin/cos/tan",
   "keywords": [
     "postcss",
