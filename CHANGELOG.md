@@ -1,8 +1,12 @@
 # Change Log
 
+## 0.1.2 - 2017-08-13
+
+* remove eval function
+
 ## 0.1.0 - 2017-08-13
 
-release basic version
+* release basic version
 
 -----
 
