@@ -9,6 +9,14 @@ function run(input, output, opts) {
   });
 }
 
+it('sin(aaa)', () => {
+  return run(
+    'a{ --c: sin(aaa) }',
+    'a{ --c: sin(aaa) }',
+    {}
+  );
+});
+
 it('color: red', () => {
   return run(
     'a{ color: red }',

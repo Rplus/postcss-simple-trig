@@ -15,6 +15,9 @@ module.exports = postcss.plugin('postcss-simple-trig', (opts) => {
     } else if (radians.endsWith('PI')) {
       radians = `${radians.replace('PI', '') * Math.PI}`;
     }
+    if (isNaN(radians)) {
+      return args[0];
+    }
     try {
       return Number(Math[args[1]](radians).toFixed( opts.precision));
     } catch (e) {
