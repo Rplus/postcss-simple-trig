@@ -31,6 +31,13 @@
   },
   "eslintConfig": {
     "extends": "eslint-config-postcss",
+    "rules": {
+      "no-eval": 0,
+      "indent": [
+        "error",
+        2
+      ]
+    },
     "env": {
       "jest": true
     }
