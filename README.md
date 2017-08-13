@@ -1,27 +1,56 @@
-# PLUGIN_TITLE [![Build Status][ci-img]][ci]
+# PostCSS Simple Trig [![Build Status][ci-img]][ci]
 
-[PostCSS] plugin PLUGIN_DESC.
+[PostCSS] plugin to calculate trigonometric functions: `sin`/`cos`/`tan`.
 
 [PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/GITHUB_NAME/PLUGIN_NAME.svg
-[ci]:      https://travis-ci.org/GITHUB_NAME/PLUGIN_NAME
+[ci-img]:  https://travis-ci.org/Rplus/postcss-simple-trig.svg
+[ci]:      https://travis-ci.org/Rplus/postcss-simple-trig
 
 ```css
+/* Input */
 .foo {
-    /* Input example */
+  boo: sin(60deg);
+  padding: calc(cos(60deg) * 1em);
 }
 ```
 
 ```css
+/* Output */
 .foo {
-  /* Output example */
+  boo: 0.86603;
+  padding: calc(0.5 * 1em);
 }
 ```
 
 ## Usage
 
 ```js
-postcss([ require('PLUGIN_NAME') ])
+postcss([ require('postcss-simple-trig') ]);
+postcss([ require('postcss-simple-trig')({ precision: 2 }) ]);
 ```
 
 See [PostCSS] docs for examples for your environment.
+
+## Options
+
+### precision
+* type: `Integer`
+* default: `5`
+* allow: `0` ~ `20`
+
+Used to determine how many digits after the decimal will be allowed.  
+ref: [number.toFixed @ MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed)
+
+```css
+/* Input */
+.foo {
+  margin-left: sin(60deg);
+}
+```
+
+```css
+/* Output with { precision: 2 } */
+.foo {
+  margin-left: 0.87;
+}
+```
