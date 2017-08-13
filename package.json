@@ -1,0 +1,38 @@
+{
+  "name": "postcss-simple-trig",
+  "version": "0.0.1",
+  "description": "A PostCSS plugin to calculate trigonometric functions sin/cos/tan",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "trigonometric",
+    "sin",
+    "cos",
+    "tan"
+  ],
+  "author": "Rplus <rplus.tw@gmail.com>",
+  "license": "MIT",
+  "repository": "Rplus/postcss-simple-trig",
+  "bugs": {
+    "url": "https://github.com/Rplus/postcss-simple-trig/issues"
+  },
+  "homepage": "https://github.com/Rplus/postcss-simple-trig",
+  "dependencies": {
+    "postcss": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-postcss": "^2.0.2",
+    "jest": "^20.0.0"
+  },
+  "scripts": {
+    "test": "jest && eslint *.js"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-postcss",
+    "env": {
+      "jest": true
+    }
+  }
+}
