@@ -1,5 +1,7 @@
 # PostCSS Simple Trig [![Build Status][ci-img]][ci]
 
+[![Join the chat at https://gitter.im/Rplus/postcss-simple-trig](https://badges.gitter.im/Rplus/postcss-simple-trig.svg)](https://gitter.im/Rplus/postcss-simple-trig?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [PostCSS] plugin to calculate trigonometric functions: `sin`/`cos`/`tan`.
 
 [PostCSS]: https://github.com/postcss/postcss
