@@ -22,10 +22,14 @@
     "postcss": "^6.0.23"
   },
   "devDependencies": {
+    "ansi-regex": ">=5.0.1",
     "eslint": "^6.0.0",
     "eslint-config-postcss": "^2.0.2",
     "jest": "^24.8.0",
-    "pre-push": "^0.1.1"
+    "node-notifier": ">=8.0.1",
+    "pre-push": "^0.1.1",
+    "set-value": ">=4.0.1",
+    "tmpl": ">=1.0.5"
   },
   "scripts": {
     "lint": "eslint *.js",
